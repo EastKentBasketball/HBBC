@@ -1,0 +1,50 @@
+---
+# Feel free to add content and custom Front Matter to this file.
+# To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
+
+layout: SiteMaster
+nav: "1"
+title: "Home"
+---
+<div>
+	<p>Herne Bay Basketball Club was established over 50 years ago and was a founding member of the East Kent Basketball Association in 1961, which operates the local basketball competitions in the East Kent area.</p>
+	<p>Based at The Bay Sports Arena in Herne Bay, the club is managed by a group of dedicated volunteers led by Club Chairman Brian Steele. We currently provide basketball oppertunities for players at both a Junior and Senior level.</p>
+</div>
+<hr />
+<div id="SlippyMap" style="width: 100%; height: 300px; position: relative; outline: none;" ></div>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script>
+function SlippyMap() {
+    var SlippyMap = getElem("SlippyMap");
+    if (SlippyMap != null) {
+        var Long = 1.112060;
+        var Lat = 51.360669;
+        if (Long == "0" && Lat == "0") {
+            SlippyMap.style.display = 'none';
+        } else {
+            var mymap = L.map('SlippyMap').setView([Lat, Long], 12);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(mymap);
+            //L.Icon.Default.imagePath = '../Content/images/';
+            L.marker([Lat, Long]).addTo(mymap)
+                .bindPopup('<a href="https://www.openstreetmap.org/?mlat=' + Lat + '&amp;mlon=' + Long + '#map=10/' + Lat + '/' + Long + '&amp;" target="_blank">' + 'HBBC' + '</a>')
+                .openPopup();
+        }
+    }
+}
+function getElem(e) {
+    return document.getElementById(e) || null
+}
+
+docReady(function () {
+	SlippyMap();
+});
+
+</script>
+<hr />
+<div>
+	<h2>Site Map</h2>
+	<div id="projectLinks"></div>
+</div>
